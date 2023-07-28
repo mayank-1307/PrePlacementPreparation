@@ -1,0 +1,33 @@
+class Solution 
+{
+    public int majorityElement(int[] nums)
+    {
+       Arrays.sort(nums);
+        int i,k=1,m=0,sum=0;
+        for(i=0;i<nums.length-1;i++)
+        {
+            if(nums[i]==nums[i+1])
+            {
+                k++;
+            }
+            else
+            {
+                
+                if(k>sum)
+                {
+                    sum=k;
+                    m=i;
+                    
+                }
+                k=1;
+            }
+        }
+        if(k>sum)
+        {
+            sum=k;
+            m=i;
+        }
+            
+        return nums[m];
+    }
+}
