@@ -1,0 +1,26 @@
+
+class Solution {
+    public Node connect(Node root) {
+       recurse(root);
+       return root;
+    }
+
+    public void recurse(Node root){
+        // if the root or root's left child is null that means there will be no other node present in that level for a perfect binary tree
+        if(root == null || root.left == null) return;
+
+        // connecting the next pointer of current child left to the right child
+        root.left.next = root.right;
+
+        // manipulation of node pointers of grandchild
+        Node temp = root.left;
+        while(temp.next != null && temp.left != null){
+            temp.right.next = temp.next.left;
+            temp = temp.next;
+        }
+
+        //same process for root's children
+        recurse(root.left);
+        recurse(root.right);
+    }
+}
