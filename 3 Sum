@@ -1,0 +1,44 @@
+class Solution {
+    List<List<Integer>> list = new ArrayList();
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++)
+        {
+            if(i==0 || nums[i-1]!=nums[i])
+            {
+                twoSumSorted(i+1,nums.length-1,nums,0-nums[i]);
+            }
+        }
+        return list;
+    }
+    void twoSumSorted(int i,int j,int [] nums,int target)
+    {
+        int a=nums[i-1];
+        while(i<j)
+        {
+            if(nums[i]+nums[j]>target)
+            {
+                j--;
+            }
+            else if(nums[i]+nums[j]<target)
+            {
+                i++;
+            }
+            else
+            {
+                List<Integer> list1 = new ArrayList();
+                list1.add(a);
+                list1.add(nums[i]);
+                list1.add(nums[j]);
+                list.add(list1);
+                while(i<j && nums[i]==nums[i+1]) 
+                i++;
+                while(i<j && nums[j]==nums[j-1])
+                j--;
+
+                i++;
+                j--;
+            }
+        }
+    }
+}
