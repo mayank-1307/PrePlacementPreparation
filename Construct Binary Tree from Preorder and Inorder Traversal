@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int el:inorder)
+        list.add(el);
+        TreeNode root=null;
+        int x=Integer.MIN_VALUE;
+        TreeNode pin=null;
+        Stack<Integer> ind = new Stack<>();
+        Stack<TreeNode> ref =new Stack<>();
+        int value=preorder[0];
+        int pos=list.indexOf(value);
+        ref.push(new TreeNode(value));
+        ind.push(pos);
+        list.set(pos,x);
+        pin=ref.peek();
+        root=pin;
+        for(int i=1;i<preorder.length;i++)
+        {
+            value=preorder[i];
+            pos=list.indexOf(value);
+            int s=ind.size();
+            while(!ind.isEmpty() && pos>ind.peek())
+            {
+                pin=ref.pop();
+                ind.pop();
+            }
+            if(ind.size()==s)
+            {
+                pin.left=new TreeNode(value);
+                pin=pin.left;
+            }
+            else
+            {
+                pin.right=new TreeNode(value);
+                pin=pin.right;
+            }
+            ref.push(pin);
+            ind.push(pos);
+            list.set(pos,x);
+        }
+        return root;
+    }
+}
