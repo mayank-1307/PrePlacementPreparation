@@ -1,0 +1,38 @@
+class Solution {
+    public boolean isPal(String str)
+    {
+        for(int i=0;i<str.length()/2;i++)
+        {
+            if(str.charAt(i)!=str.charAt(str.length()-1-i))
+            return false;
+        }
+        return true;
+    }
+    public String longestPalindrome(String s) {
+        char ch=s.charAt(0);
+        String res="";
+        int max=0;
+        for(int i=0;i<s.length()-1;i++)
+        {
+            for(int j=i+1;j<s.length();j++)
+            {
+                String str=s.substring(i,j+1);
+                if(isPal(str))
+                {
+                    int len=str.length();
+                    if(len>max)
+                    {
+                        max=len;
+                        res=str;
+                    }
+                }
+            }
+            if(max==s.length())
+            return s;
+        }
+        if(max==0)
+        return Character.toString(s.charAt(0));
+        else
+        return res;
+    }
+}
