@@ -1,0 +1,15 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+       Deque<Integer> stack = new ArrayDeque<Integer>();
+        for(ListNode curr=head;curr!=null;curr=curr.next)
+        {
+            stack.push(curr.val);
+        }
+        for(ListNode curr=head;curr!=null;curr=curr.next)
+        {
+            if(stack.pop()!=curr.val)
+                return false;
+        }
+        return true;
+    }
+}
